@@ -215,6 +215,10 @@ Resources:
       TableName: !Sub ${AWS::StackName}-usersTable
     Metadata:
       StackeryName: Users
+  DestinationsTest:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub ${AWS::StackName}-DestinationsTest
 Parameters:
   StackeryStackTagName:
     Type: String
