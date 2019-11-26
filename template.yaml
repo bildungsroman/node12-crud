@@ -215,10 +215,14 @@ Resources:
       TableName: !Sub ${AWS::StackName}-usersTable
     Metadata:
       StackeryName: Users
-  DestinationsTest:
+  SuccessQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: !Sub ${AWS::StackName}-DestinationsTest
+      QueueName: !Sub ${AWS::StackName}-SuccessQueue
+  FailQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub ${AWS::StackName}-FailQueue
 Parameters:
   StackeryStackTagName:
     Type: String
