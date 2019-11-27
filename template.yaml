@@ -185,20 +185,10 @@ Resources:
         - AWSXrayWriteOnlyAccess
         - DynamoDBCrudPolicy:
             TableName: !Ref usersTable
-        - SQSSendMessagePolicy:
-            QueueName: !GetAtt FailQueue.QueueName
-        - SQSSendMessagePolicy:
-            QueueName: !GetAtt SuccessQueue.QueueName
       Environment:
         Variables:
           TABLE_NAME: !Ref usersTable
           TABLE_ARN: !GetAtt usersTable.Arn
-          QUEUE_NAME: !GetAtt FailQueue.QueueName
-          QUEUE_ARN: !GetAtt FailQueue.Arn
-          QUEUE_URL: !Ref FailQueue
-          QUEUE_NAME_2: !GetAtt SuccessQueue.QueueName
-          QUEUE_ARN_2: !GetAtt SuccessQueue.Arn
-          QUEUE_URL_2: !Ref SuccessQueue
       Events:
         apiGETusers:
           Type: Api
@@ -225,14 +215,6 @@ Resources:
       TableName: !Sub ${AWS::StackName}-usersTable
     Metadata:
       StackeryName: Users
-  SuccessQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: !Sub ${AWS::StackName}-SuccessQueue
-  FailQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: !Sub ${AWS::StackName}-FailQueue
 Parameters:
   StackeryStackTagName:
     Type: String
