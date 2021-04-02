@@ -63,12 +63,6 @@ Resources:
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref usersTable
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref usersTable
-          TABLE_ARN: !GetAtt usersTable.Arn
       Events:
         apiGETusersid:
           Type: Api
@@ -93,12 +87,6 @@ Resources:
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref usersTable
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref usersTable
-          TABLE_ARN: !GetAtt usersTable.Arn
       Events:
         apiPUTusersid:
           Type: Api
@@ -123,12 +111,6 @@ Resources:
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref usersTable
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref usersTable
-          TABLE_ARN: !GetAtt usersTable.Arn
       Events:
         apiPOSTusers:
           Type: Api
@@ -153,12 +135,6 @@ Resources:
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref usersTable
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref usersTable
-          TABLE_ARN: !GetAtt usersTable.Arn
       Events:
         apiDELETEusersid:
           Type: Api
@@ -183,12 +159,6 @@ Resources:
       Tracing: Active
       Policies:
         - AWSXrayWriteOnlyAccess
-        - DynamoDBCrudPolicy:
-            TableName: !Ref usersTable
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref usersTable
-          TABLE_ARN: !GetAtt usersTable.Arn
       Events:
         apiGETusers:
           Type: Api
@@ -198,23 +168,6 @@ Resources:
             RestApiId: !Ref api
     Metadata:
       StackeryName: listUsers
-  usersTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: id
-          AttributeType: S
-      KeySchema:
-        - AttributeName: id
-          KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
-      StreamSpecification:
-        StreamViewType: NEW_AND_OLD_IMAGES
-      TableName: !Sub ${AWS::StackName}-usersTable
-    Metadata:
-      StackeryName: Users
 Parameters:
   StackeryStackTagName:
     Type: String
